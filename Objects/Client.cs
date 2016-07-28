@@ -155,7 +155,7 @@ namespace HairSalon
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewClientName OUTPUT INSERTED.name WHERE id = @ClientId; UPDATE clients SET stylist_Id = @NewStylistId OUTPUT INSERTED.stylistId WHERE id = @ClientId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET client = @NewClientName OUTPUT INSERTED.client WHERE id = @ClientId; UPDATE clients SET stylist_Id = @NewStylistId OUTPUT INSERTED.stylist_Id WHERE id = @ClientId;", conn);
 
       SqlParameter newClientNameParameter = new SqlParameter();
       newClientNameParameter.ParameterName = "@NewClientName";

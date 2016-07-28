@@ -56,12 +56,14 @@ namespace HairSalon
     [Fact]
     public void Test_UpdateClientNameInDatabase()
     {
-      string clientName = "Dave", 1;
-      Client testClient = new Client(clientName);
+      string clientName = "Dave";
+      int stylistId = 1;
+      Client testClient = new Client(clientName, stylistId);
       testClient.Save();
-      string newClientName = "David", 1;
+      string newClientName = "David";
+      int newStylistId = 2;
 
-      testClient.Update(newClientName);
+      testClient.Update(newClientName, newStylistId);
 
       string result = testClient.GetClientName();
 
