@@ -62,6 +62,35 @@ namespace HairSalon
 
       Assert.Equal(newStylistName, result);
     }
+    [Fact]
+    public void Test_DeleteMethodRemovesStylistFromDatabase()
+    {
+      List<Stylist> TestStylists = new List<Stylist>{};
+
+      Stylist testStylist1 = new Stylist("Jim");
+      testStylist1.Save();
+      Stylist testStylist2 = new Stylist("Reggie");
+      testStylist2.Save();
+
+      Client TestClient1 = new Client("Bobbet", testStylist1.GetId());
+      TestClient1.Save();
+      Client TestClient2 = new Client("Hank", testStylist2.GetId());
+      TestClient2.Save();
+
+      testStylist1.Delete();
+      TestClient1.Delete();
+
+      List<Stylist> resultStylists = Stylist.GetAll();
+      List<Stylist> testStylists = new List<Stylist> {testStylist2};
+
+      List<Client> resultClients = Client.GetAll();
+      List<Client> testClients = new List<Client> {TestClient2};
+
+      Console.WriteLine(resultStylists);
+      Console.WriteLine(testStylists);
+      Assert.Equal(resultStylists, testStylists);
+      Assert.Equal(resultClients, testClients);
+    }
     public void Dispose()
     {
       Stylist.DeleteAll();
