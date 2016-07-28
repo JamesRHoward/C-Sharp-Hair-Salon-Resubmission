@@ -11,11 +11,11 @@ namespace HairSalon
     private string _clientName;
     private int _stylistId;
 
-    public Client(stringm clientName, int stylistId, int id = 0)
+    public Client(string clientName, int stylistId, int id = 0)
     {
-      _id = id;
       _clientName = clientName;
       _stylistId = stylistId;
+      _id = id;
     }
     public int GetId()
     {
@@ -47,7 +47,7 @@ namespace HairSalon
       {
         Client newClient = (Client) otherClient;
         bool idEquality = this.GetId() == newClient.GetId();
-        bool clientNameEquality = this.GetName() == newClient.GetClientName();
+        bool clientNameEquality = this.GetClientName() == newClient.GetClientName();
         return (idEquality && clientNameEquality);
       }
     }
@@ -91,7 +91,7 @@ namespace HairSalon
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@ClientName";
-      nameParameter.Value = this.GetName();
+      nameParameter.Value = this.GetClientName();
       cmd.Parameters.Add(nameParameter);
 
       SqlParameter stylistIdParameter = new SqlParameter();
@@ -157,10 +157,10 @@ namespace HairSalon
 
       SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewClientName OUTPUT INSERTED.name WHERE id = @ClientId; UPDATE clients SET stylist_Id = @NewStylistId OUTPUT INSERTED.stylistId WHERE id = @ClientId;", conn);
 
-      SqlParameter newNameParameter = new SqlParameter();
-      newNameParameter.ParameterName = "@NewName";
-      newNameParameter.Value = newName;
-      cmd.Parameters.Add(newNameParameter);
+      SqlParameter newClientNameParameter = new SqlParameter();
+      newClientNameParameter.ParameterName = "@NewClientName";
+      newClientNameParameter.Value = newClientName;
+      cmd.Parameters.Add(newClientNameParameter);
 
       SqlParameter NewStylistIdParameter = new SqlParameter();
       NewStylistIdParameter.ParameterName = "@NewStylistId";
@@ -176,7 +176,7 @@ namespace HairSalon
 
       while(rdr.Read())
       {
-        this._name = rdr.GetString(0);
+        this._clientName = rdr.GetString(0);
       }
 
       if (rdr != null)
