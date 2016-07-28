@@ -1,7 +1,8 @@
 <h1>HairSalon</h1>
 <ul>
-  @foreach (var stylist in @List)
+  @foreach (var stylist in @Model)
   {
-    <li><a href="/stylist/@stylist.GetId()">@stylist.GetName()</a></li>
+    <li><a href="/stylist/@stylist.GetId()">@stylist.GetStylistName()</a></li>
   }
 </ul>
+<h3><a href="/stylists/add">Add Stylist</a></h3>
